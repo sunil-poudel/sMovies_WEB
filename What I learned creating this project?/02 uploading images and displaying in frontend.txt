@@ -1,0 +1,39 @@
+1. accounts/models.py
+    class AppAssets(models.Model):
+        logos = models.ImageField(upload_to='logos/', blank=True, null=True)
+
+2. accounts/forms.py
+    class AppAssetsForm(forms.ModelForm):
+        class Meta:
+            model = AppAssets
+            fields = '__all__'
+
+3. don't forget to include enctype for images
+    accounts/templates/app_assets.html
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </form>
+
+4. in views.py, don't forget to include request.FILES in form creation code.
+
+    # Test function to check if the user is an admin
+    def is_admin(user):
+    return user.is_authenticated and user.is_staff
+
+    @user_passes_test(is_admin)
+    def app_assets(request):
+        if request.method=='POST':
+            form = AppAssetsForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('home')
+        else:
+            form = AppAssetsForm()
+
+        context={'form':form}
+        return render(request, 'app_assets.html', context)
+
+
+

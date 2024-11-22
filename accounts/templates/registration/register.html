@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block b %}
+    <div class="mx-5 my-5">
+        <h2>Welcome to account registration page!</h2>
+        <hr/>
+        <form action="{% url 'accounts:register' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </form>
+        <br>
+        <hr/>
+        <pre>Already have an account?</pre>
+        <button class="btn btn-outline-danger"><a href="{% url 'accounts:login' %}" style="text-decoration:none">Login</a></button>
+    </div>
+{% endblock %}
