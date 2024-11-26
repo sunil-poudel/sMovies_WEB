@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from accounts.forms import AppAssetsForm
+from accounts.forms import AppAssetsForm, UserProfileForm
 
 
 # Test function to check if the user is an admin
@@ -36,4 +36,15 @@ def register(request):
 
     context = {'form': form}
     return render(request, "registration/register.html", context)
+
+def update_profile(request):
+    if request.method=='POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=request.user.user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = UserProfileForm(instance=request.user.user_profile)
+    context = {'form':form}
+    return render(request, 'update_profile.html', context)
 

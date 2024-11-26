@@ -12,6 +12,7 @@
 
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
@@ -25,28 +26,34 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a target="_blank" class="nav-link active" aria-current="page" href="https://imdb.com">
+                        <button class="btn btn-outline-danger">
+                            IMDB
+                        <img src="{{ imdb.logos.url }}" alt="logo of imdb" style="height:20px; width:30px">
+                        </button>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a target="_blank" class="nav-link active" aria-current="page" href="https://rottentomatoes.com">
+                        <button class="btn btn-outline-danger">
+                            Rotten Tomatoes
+                        <img src="{{ rotten_tomatoes.logos.url }}" alt="logo of rotten tomatoes" style="height:20px; width:50px;">
+                        </button>
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class=" nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        Dropdown
+                        <button class="btn btn-outline-success">Connect with me</button>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://facebook.com/iamsunilpoudel">Facebook</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://www.instagram.com/sunilpoudel__/">Instagram</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://github.com/sunil-poudel">Github</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://www.linkedin.com/in/iamsunilpoudel/">Linkedin</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
+                
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -55,6 +62,13 @@
             <div class="mx-3">
                 {% if user.is_authenticated %}
                     <weak>Hi {{ user.username }}!</weak>
+                    {% if user.user_profile.profile_picture %}
+                        <img
+                                src="{{ user.user_profile.profile_picture.url }}" 
+                                alt="profile picture of {{ user.username }}"
+                                style="width:30px; height:30px; border-radius:50%"
+                        >
+                    {% endif %}
                 {% else %}
                     <weak>Hi guest!</weak>
                 {% endif %}

@@ -1,5 +1,6 @@
 from django import forms
-from accounts.models import UserProfile, AppAssets
+from accounts.models import AppAssets, UserProfile
+
 
 class AppAssetsForm(forms.ModelForm):
     class Meta:
@@ -9,5 +10,5 @@ class AppAssetsForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = '__all__'
-
+        fields = ['bio', 'profile_picture' ]
+        labels = {'bio':'enter your bio', 'profile_picture':'upload profile picture'}
