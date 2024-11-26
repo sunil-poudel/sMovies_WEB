@@ -20,7 +20,7 @@ class UserProfile(models.Model):
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     try:
-        instance.profile.save()
+        instance.user_profile.save()
     except ObjectDoesNotExist:
         UserProfile.objects.create(user=instance)
 

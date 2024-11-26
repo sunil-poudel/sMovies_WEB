@@ -1,0 +1,8 @@
+1. urlpatterns = [....] not {....}
+
+2. don't forget to include enctype code in forms if forms take image input.
+
+3. don't forget to include request.FILES during form creation in views.py
+if form takes image input.
+
+4.
