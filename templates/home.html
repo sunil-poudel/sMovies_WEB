@@ -2,5 +2,45 @@
 {% load django_bootstrap5 %}
 
 {% block b %}
+    {% if messages %}
+        {% for m in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Success!</strong> {{ m }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
     
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3" style="width:700px">
+              <img src="{{ movies_banner.movies_banner.url }}" style="width:700px;height:400px;" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Movies</h5>
+                <p class="card-text">
+                    Browse for movies based on genre, watch trailers and reviews!
+                </p>
+                <button class="btn btn-success">
+                    <a href="{% url 'movies:movie_browse' %}" style="text-decoration:none; color:white">
+                        Go to movie browser
+                    </a>
+                </button>
+              </div>
+                
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-3" style="width:700px">
+              <img src="https://placehold.co/700x400" style="width:700px;height:400px;" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Tickets</h5>
+                <p class="card-text">Buy movie tickets for theatre in or around your town!</p>
+                <button class="btn btn-success">Go to ticket browser</button>  
+              </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
 {% endblock %}

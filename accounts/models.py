@@ -8,6 +8,8 @@ from django.dispatch import receiver
 # Create your models here.
 class AppAssets(models.Model):
     logos = models.ImageField(upload_to='logos/', blank=True, null=True)
+    movies_banner = models.ImageField(upload_to='banners/', blank=True, null=True)
+    tickets_banner = models.ImageField(upload_to='banners/', blank=True, null=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")

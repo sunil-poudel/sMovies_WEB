@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     # my apps
     'django_bootstrap5',
     'accounts',
-    
+    'movies',
+    'tickets',
 
     # default apps
     'django.contrib.admin',

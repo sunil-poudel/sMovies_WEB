@@ -1,0 +1,6 @@
+Note: if user=models.OneToOneRelation(......., related_name='user_profile')
+            intro = ..
+            profile_picture = ...
+we can do:
+    user.user_profile.profile_picture.url and many more
+    so, related_name is important to understand.

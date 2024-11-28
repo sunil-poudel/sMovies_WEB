@@ -9,10 +9,41 @@
     {% load django_bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+   
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional: Animate.css for predefined animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        /* Typewriter Animation */
+        .typewriter h2 {
+            overflow: hidden; /* Ensures the text stays within the boundary */
+            white-space: nowrap; /* Prevents the text from wrapping */
+            border-right: 3px solid #000; /* Creates the cursor effect */
+            animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
+        }
 
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: black;
+            }
+        }
+    </style>
+    
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
@@ -29,7 +60,7 @@
                     <a target="_blank" class="nav-link active" aria-current="page" href="https://imdb.com">
                         <button class="btn btn-outline-danger">
                             IMDB
-                        <img src="{{ imdb.logos.url }}" alt="logo of imdb" style="height:20px; width:30px">
+                            <img src="{{ imdb.logos.url }}" alt="logo of imdb" style="height:20px; width:30px">
                         </button>
                     </a>
                 </li>
@@ -37,7 +68,8 @@
                     <a target="_blank" class="nav-link active" aria-current="page" href="https://rottentomatoes.com">
                         <button class="btn btn-outline-danger">
                             Rotten Tomatoes
-                        <img src="{{ rotten_tomatoes.logos.url }}" alt="logo of rotten tomatoes" style="height:20px; width:50px;">
+                            <img src="{{ rotten_tomatoes.logos.url }}" alt="logo of rotten tomatoes"
+                                 style="height:20px; width:50px;">
                         </button>
                     </a>
                 </li>
@@ -47,31 +79,54 @@
                         <button class="btn btn-outline-success">Connect with me</button>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" target="_blank" href="https://facebook.com/iamsunilpoudel">Facebook</a></li>
-                        <li><a class="dropdown-item" target="_blank" href="https://www.instagram.com/sunilpoudel__/">Instagram</a></li>
-                        <li><a class="dropdown-item" target="_blank" href="https://github.com/sunil-poudel">Github</a></li>
-                        <li><a class="dropdown-item" target="_blank" href="https://www.linkedin.com/in/iamsunilpoudel/">Linkedin</a></li>
+                        <li><a class="dropdown-item" target="_blank"
+                               href="https://facebook.com/iamsunilpoudel">Facebook</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://www.instagram.com/sunilpoudel__/">Instagram</a>
+                        </li>
+                        <li><a class="dropdown-item" target="_blank" href="https://github.com/sunil-poudel">Github</a>
+                        </li>
                     </ul>
                 </li>
-                
+
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <div class="mx-3">
-                {% if user.is_authenticated %}
-                    <weak>Hi {{ user.username }}!</weak>
-                    {% if user.user_profile.profile_picture %}
-                        <img
-                                src="{{ user.user_profile.profile_picture.url }}" 
-                                alt="profile picture of {{ user.username }}"
-                                style="width:30px; height:30px; border-radius:50%"
-                        >
-                    {% endif %}
-                {% else %}
-                    <weak>Hi guest!</weak>
-                {% endif %}
+
+            <div class="nav-item dropdown mx-3">
+                <a class=" nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    <button class="btn btn-outline-danger">
+                        <div>
+                            {% if user.is_authenticated %}
+                            <weak>Hi {{ user.username }}!</weak>
+                            {% if user.user_profile.profile_picture %}
+                                <img
+                                        src="{{ user.user_profile.profile_picture.url }}"
+                                        alt="profile picture of {{ user.username }}"
+                                        style="width:20px; height:20px; border-radius:50%"
+                                >
+                            {% endif %}
+                        {% else %}
+                            <weak>Hi guest!</weak>
+                        {% endif %}
+                        </div>
+                    </button>
+                </a>
+            <ul class="dropdown-menu">
+                        <li>
+                            <div class="mx-3">
+                                {% if user.is_authenticated %}
+                                    <a style="text-decoration:none;"
+                                       href="{% url 'accounts:update_profile' %}">Update Profile!</a>
+                                {% else %}
+                                    <weak>You can create account, then update profile clicking here.</weak>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+
             </div>
             <div class="mx-3">
                 {% if user.is_authenticated %}
@@ -91,6 +146,16 @@
         </div>
     </div>
 </nav>
+
+    <div class="container text-center mt-2">
+        <!-- Typewriter Animation -->
+        <div class="typewriter">
+            <h2>Welcome to sMovies application!</h2>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 {% block b %}

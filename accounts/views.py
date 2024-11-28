@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.forms import UserCreationForm
@@ -29,6 +30,7 @@ def register(request):
         form = UserCreationForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
+            messages.success(request, "account registered successfully!")
             login(request, new_user)
             return render(request, 'home.html')
     else:
@@ -42,6 +44,7 @@ def update_profile(request):
         form = UserProfileForm(request.POST, request.FILES, instance=request.user.user_profile)
         if form.is_valid():
             form.save()
+            messages.success(request, "profile updated successfully!")
             return redirect('home')
     else:
         form = UserProfileForm(instance=request.user.user_profile)
