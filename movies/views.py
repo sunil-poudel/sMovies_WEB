@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.db.models import Q
 from movies.models import Genre, Movies
 
 
@@ -22,6 +22,14 @@ def movie_details(request, movie_id):
 
 def search_results(request):
     query = request.GET.get('query')
-    results = Movies.objects.filter(name__icontains=query)
+    results = Movies.objects.filter(
+        Q(name__icontains=query) |
+        Q(release_date__icontains=query) |
+        Q(language__icontains=query) |
+        Q(short_theme__icontains=query) |
+        Q(summary__icontains=query) |
+        Q(gpt_review__icontains=query) |
+        Q(language__icontains=query)
+    ).distinct() if query else []
     context = {'query':query, 'results':results}
     return render(request, 'search_results.html', context)
