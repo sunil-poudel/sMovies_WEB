@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block b %}
+    {% if results %}
+        <div class="row">
+            {% for m in results %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img
+                              src="{{ m.movie_poster_link }}"
+                              class="card-img-top" alt="Poster for {{ m.name }}"
+                              style="width:200px; height:300px;"
+                      >
+                      <div class="card-body">
+                        <h5 class="card-title">{{ m.name }}</h5>
+                        <p class="card-text">Released on: {{ m.release_date }}</p>
+                        <a href="{% url 'movies:movie_details' m.id %}" class="btn btn-primary">View movie</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+            <h3>Sorry! No movies for query: {{ query }}</h3>
+    {% endif %}
+
+{% endblock %}

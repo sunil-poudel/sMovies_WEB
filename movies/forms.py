@@ -17,5 +17,13 @@ class MoviesForm(forms.ModelForm):
 class GenreForm(forms.ModelForm):
     class Meta:
         model = Genre
-        fields = {'movie_genre'}
-        labels = {'movie_genre':'genre'}
+        fields = {'genre_name'}
+        labels = {'genre_name': 'genre'}
+
+class SearchForm(forms.Form):
+    query = forms.CharField(required=False, label='', widget=forms.TextInput(
+        attrs={
+            'placeholder':'search movies',
+            'class':'form-control mr-sm-2',
+        }
+    ))

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block b %}
+    <div class="row">
+        <div class="col-6">
+            <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ movie.movie_poster_link }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.name}}</h5>
+            <p class="card-text">Released on: {{ movie.release_date }}</p>
+            <p class="card-text">Language: {{ movie.language }}</p>
+            <p class="card-text">Genre: {{ movie.genre_name }}</p>
+            <p class="card-text">Short theme: {{ movie.short_theme }}</p>
+{#            <p class="card-text"><small class="text-body-secondary">Last updated: {{ movie.date_added }}</small></p>#}
+          </div>
+        </div>
+      </div>
+
+    <div class="row g-0">
+        <div class="card">
+          <div class="card-header">
+              <h3>Movie Details</h3>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h5>Summary</h5>
+                <p>{{ movie.summary }}</p>
+            </li>
+            <li class="list-group-item">
+                <h5>Review from ChatGPT</h5>
+                <p><i>{{ movie.gpt_review }}</i></p>
+            </li>
+          </ul>
+        </div>
+    </div>
+    </div>
+        </div>
+        <div class="col-6">
+            <h4>View trailer for {{ movie.name }}</h4>
+            <p>Trailer for some movies may not be available!</p>
+            {{ movie.trailer_embed_link | safe }}
+        </div>
+    </div>
+
+{% endblock %}
+
