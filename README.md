@@ -17,3 +17,5 @@ movies app!
 <img src="assets/app_7.png" alt="app sample" width="683">
 </div>
 
+I will try to optimize this application later by using API's to fetch database, because currently it's not optimized.
+
